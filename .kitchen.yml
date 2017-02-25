@@ -1,8 +1,10 @@
 ---
 driver:
   require_chef_omnibus: 12.18.31
-  name: docker
+  name: vagrant #docker
   use_sudo: false
+  vagrantfiles:
+    - .kitchen.vagrant-config.rb
 
 provisioner:
   name: chef_zero
@@ -14,12 +16,8 @@ platforms:
       network:
       - ["forwarded_port", {guest: 80, host: 8080}]
 
-platforms:
-  - name: ubuntu-16.04
-  - name: centos-7.2
-
 suites:
   - name: default
     run_list:
-      - recipe[playground::default]
+      - recipe[chef_starter::default]
     attributes:
